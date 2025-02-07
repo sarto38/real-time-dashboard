@@ -7,5 +7,11 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'settings', component: SettingsComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' } // Default route
+  { path: '', redirectTo: '/home', pathMatch: 'full' }, // Default route
 ];
+
+export enum Route {
+  Home = 'home',
+  Dashboard = 'dashboard',
+  Settings = 'settings',
+}

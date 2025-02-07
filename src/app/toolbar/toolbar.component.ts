@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NavigationService } from '../navigation/navigation.service';
+import { Route } from '../routes';
 
 @Component({
   selector: 'app-toolbar',
@@ -36,7 +37,7 @@ export class ToolbarComponent {
     this.darkMode.set(!this.darkMode());
   }
   navigateHome() {
-    this.navigationService.navigateTo('/home');
+    this.navigationService.navigateTo(Route.Home);
   }
   @Output() menuClick = new EventEmitter<void>();
 }

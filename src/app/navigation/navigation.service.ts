@@ -14,8 +14,9 @@ export class NavigationService {
     return this.navigationSubject.asObservable();
   }
 
-  navigateTo(path: string) {
+  navigateTo(page: string) {
+    var path = '/' + page;
     this.router.navigate([path]);
-    this.navigationSubject.next(path);
+    this.navigationSubject.next(page);
   }
 }

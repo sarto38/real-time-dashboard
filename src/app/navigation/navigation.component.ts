@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { NavigationService } from './navigation.service';
+import { Route } from '../routes';
 
 @Component({
   selector: 'app-navigation',
@@ -10,9 +11,10 @@ import { NavigationService } from './navigation.service';
   imports: [MatListModule],
 })
 export class NavigationComponent {
+  public Route = Route;
   constructor(private navigationService: NavigationService) {}
 
-  navigateTo(path: string) {
-    this.navigationService.navigateTo(path);
+  navigateTo(page: string) {
+    this.navigationService.navigateTo(page);
   }
 }
