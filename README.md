@@ -12,6 +12,15 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
+## Development Setup
+
+Ensure that you have the latest version of the Angular language service extension installed in your IDE to avoid incorrect diagnostics. This project uses Angular 19.
+
+1. Open your IDE (e.g., VS Code).
+2. Go to Extensions (Ctrl+Shift+X).
+3. Search for "Angular Language Service".
+4. Update the extension if an update is available.
+
 ## Code scaffolding
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
