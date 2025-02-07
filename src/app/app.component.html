@@ -1,4 +1,4 @@
-<app-toolbar (menuClick)="toggleSidenav()"></app-toolbar>
+<app-toolbar [darkMode]="darkMode" (menuClick)="toggleSidenav()"></app-toolbar>
 <div>
   <app-sidenav #sidenav>
     <router-outlet></router-outlet>
