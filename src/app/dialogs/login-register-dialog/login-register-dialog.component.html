@@ -1,0 +1,28 @@
+<mat-dialog-content class="mat-typography">
+  <mat-tab-group>
+    <mat-tab label="Login">
+      <div class="input-field">
+        <saar-text-input
+          [placeholder]="'Email'"
+          [value]="email"
+          [customValidators]="emailValidators"
+          [required]="true"
+        ></saar-text-input>
+      </div>
+      <div class="input-field">
+        <saar-text-input
+          [placeholder]="'Password'"
+          [type]="'password'"
+          [value]="password"
+          [minLength]="6"
+          [required]="true"
+        ></saar-text-input>
+      </div>
+    </mat-tab>
+    <mat-tab label="Register"> </mat-tab>
+  </mat-tab-group>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onLogin()">Login</button>
+</mat-dialog-actions>

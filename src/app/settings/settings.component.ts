@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { ValidatorFn, Validators } from '@angular/forms';
-import { SaarTextInputComponent } from '../../components/inputs/saar-text-input/saar-text-input.component';
+import { AccountService } from '../../services/account.service';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  imports: [SaarTextInputComponent],
+  imports: [MatButtonModule, CommonModule],
   standalone: true,
   styleUrls: ['./settings.component.scss'],
 })
@@ -13,18 +14,9 @@ export class SettingsComponent {
   username: string = '';
   email: string = '';
   password: string = '';
+  loggedIn: boolean = false;
 
-  emailValidators: {
-    validatorFn: ValidatorFn;
-    errorId: string;
-    errorMessage: string;
-  }[] = [
-    {
-      validatorFn: Validators.email,
-      errorId: 'email',
-      errorMessage: 'Please enter a valid email address',
-    },
-  ];
+  constructor(private accountService: AccountService) {}
 
   onUsernameChange(value: string) {
     this.username = value;

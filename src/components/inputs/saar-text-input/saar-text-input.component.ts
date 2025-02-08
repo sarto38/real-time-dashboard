@@ -5,6 +5,7 @@ import {
   EventEmitter,
   OnChanges,
   SimpleChanges,
+  WritableSignal,
 } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import {
@@ -24,7 +25,7 @@ import { CommonModule } from '@angular/common';
 })
 export class SaarTextInputComponent implements OnChanges {
   @Input() placeholder: string = '';
-  @Input() value: string = '';
+  @Input() value: string | WritableSignal<string> = ''; // by allowing it to be a signal we can use it in a reactive way and not implement onInputChange every time
   @Input() type: 'text' | 'password' = 'text';
   @Input() disabled: boolean = false;
   @Input() required: boolean = false;
@@ -40,6 +41,18 @@ export class SaarTextInputComponent implements OnChanges {
 
   control: FormControl;
 
+  private get _value(): string {
+    return typeof this.value === 'string' ? this.value : this.value();
+  }
+
+  private set _value(value: string) {
+    if (typeof this.value === 'string') {
+      this.value = value;
+    } else {
+      this.value.set(value);
+    }
+  }
+
   constructor() {
     this.control = new FormControl(this.value, this.getValidators());
     this.control.valueChanges.subscribe((value) => this.onInputChange(value));
@@ -47,7 +60,7 @@ export class SaarTextInputComponent implements OnChanges {
 
   ngOnChanges(changes: any) {
     if (changes.value) {
-      this.control.setValue(this.value, { emitEvent: false });
+      this.control.setValue(this._value, { emitEvent: false });
     }
     this.control.setValidators(this.getValidators());
     this.control.updateValueAndValidity();
@@ -91,6 +104,7 @@ export class SaarTextInputComponent implements OnChanges {
   }
 
   onInputChange(value: string): void {
+    this._value = value;
     this.valueChange.emit(value);
   }
 }
