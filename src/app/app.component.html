@@ -1,6 +1,6 @@
 <app-toolbar [darkMode]="darkMode" (menuClick)="toggleSidenav()"></app-toolbar>
-<div>
-  <app-sidenav #sidenav>
+<div style="display: flex; flex-direction: column; height: calc(100vh - 64px)">
+  <app-sidenav #sidenav style="flex: 1; overflow-y: auto">
     <router-outlet></router-outlet>
   </app-sidenav>
 </div>

@@ -1,4 +1,8 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -9,6 +13,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { AuthInterceptor } from '../interceptors/http.interceptor';
+import { BlockUIModule } from 'ng-block-ui';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,5 +26,6 @@ export const appConfig: ApplicationConfig = {
     },
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideAnimationsAsync(),
+    importProvidersFrom(BlockUIModule.forRoot()),
   ],
 };

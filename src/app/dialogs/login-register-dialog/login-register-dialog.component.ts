@@ -8,9 +8,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatTabsModule, MatTabGroup } from '@angular/material/tabs';
 import { AccountService } from '../../../services/account.service';
 import { SaarTextInputComponent } from '../../../components/inputs/saar-text-input/saar-text-input.component';
+import { SnackbarService } from '../../../services/snackbar.service';
 
 @Component({
   selector: 'app-login-register-dialog',
@@ -30,6 +31,7 @@ import { SaarTextInputComponent } from '../../../components/inputs/saar-text-inp
 export class LoginRegisterDialogComponent {
   password: WritableSignal<string> = signal('');
   email: WritableSignal<string> = signal('');
+  currentTabIndex: WritableSignal<number> = signal(0);
   emailValidators: {
     validatorFn: ValidatorFn;
     errorId: string;
@@ -43,6 +45,7 @@ export class LoginRegisterDialogComponent {
   ];
   constructor(
     public dialogRef: MatDialogRef<LoginRegisterDialogComponent>,
+    private snackbarService: SnackbarService,
     private accountService: AccountService
   ) {}
 
@@ -55,6 +58,7 @@ export class LoginRegisterDialogComponent {
         }
       },
       error: (error) => {
+        this.snackbarService.openSnackBar(error.error, 'Close');
         console.error(error);
       },
     });
@@ -69,11 +73,15 @@ export class LoginRegisterDialogComponent {
         }
       },
       error: (error) => {
+        this.snackbarService.openSnackBar(error.error, 'Close');
         console.error(error);
       },
     });
   }
   onCancel(): void {
     this.dialogRef.close();
+  }
+  onTabChange(index: number) {
+    this.currentTabIndex.set(index);
   }
 }
